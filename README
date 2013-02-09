@@ -1,1 +1,46 @@
-This file was created by IntelliJ IDEA 12.0.3 for binding GitHub repository
+
+A Secure Cookie Protocol
+------------------------
+
+A secure cookie protocol based on the white paper by:
+Alex X. Liu, Jason M. Kovacs - Department of Computer Sciences
+                               University of Texas at Austin
+
+Chin-Tser Huang - Dept. of Computer Science and Engineering
+                  University of South Carolina
+
+Mohamed G. Gouda - Department of Computer Sciences
+                   The University of Texas at Austin
+
+For more information on Secure Cookie Protocol see the whitepaper at
+http://www.cse.msu.edu/~alexliu/publications/Cookie/cookie.pdf
+
+Java implementation written by: Roger Brooks
+http://www.rogerbrooks.us
+
+
+### Docs
+
+Coming soon...but until then some pseudo java code.
+
+    String a_value_you_want_to_store = "Hello World!";
+    byte[] your_server_key = "F-E8JHTyP6h!ZyCP!GkG".getBytes();
+    byte[] the_ssl_session_key = "pup_DrZexstPxvPr@jqY-_af^Sfh~GP@".getBytes();
+
+    SecureCookie cookie = new SecureCookie(your_server_key, the_ssl_session_key, a_unique_user_id);
+
+    String value_to_send_with_cookie = cookie.getSecureCookie(a_value_you_want_to_store);
+
+    //Send your cookie
+    // server ------> user
+
+    //Check the cookie you sent
+    // server <------- user
+
+    String value = cookie.verifySecureCookie(value_received_back_from_user);
+
+    if(value == null) {
+        return "This cookie is not valid, maybe even tampered with!";
+    } else {
+        return "Hey! We are all good, here is the value you stored: " + value;
+    }
